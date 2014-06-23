@@ -21,12 +21,12 @@
     </section>
 
     <section>
-    <h3>Who I am / Why I'm here</h3>
+    <h3>Me (and why I'm here)</h3>
     <ul>
-      <li>I work for <a href="http://www.mozilla.org">Mozilla</a></li>
-      <li>My job is platform and Firefox security</li>
-      <li>I'm really interested in making web security better</li>
-      <li>CSP is hugely underused :(</li>
+      <li>I am Mark Goodwin</li>
+      <li>I work for <a href="http://www.mozilla.org">Mozilla</a> on security (platform, Firefox & web)</li>
+      <li>I want to improve web security</li>
+      <li>CSP is underused :(</li>
     </ul>
     <div role="note">
     </div>
@@ -43,8 +43,142 @@
     </ul>
     <div role="note">
       It doesn't really make sense to talk about CSP without looking at why we
-      need it in the first place.
+      need it in the first place.<br/>
+      CSP - what it is and why it's great!
     </div>
+    </section>
+
+    <section>
+    <h3>Let's talk about XSS</h3>
+    <ul>
+      <li>Reflected</li>
+      <li>Stored</li>
+      <li>DOM<br/><input id="in1"><button onclick="document.getElementById('demo').innerHTML = 'Hi '+document.getElementById('in1').value+'!'">Click!</button></li>
+      <div id="demo"></div>
+    </ul>
+     <div role="note">
+      It doesn't really make sense to talk about CSP without looking at why we
+      need it in the first place.<br/>
+      CSP - what it is and why it's great!
+    </div>
+    </section>
+
+    <section>
+    <h3>Let's talk about CSP</h3>
+    <ul>
+      <li>Content Security Policy</li>
+      <li>It's a policy...</li>
+      <li>... to secure content</li>
+    </ul>
+     <div role="note">
+    </div>
+    </section>
+
+    <section>
+    <h3>example</h3>
+    <code>
+      &nbsp; Content-Security-Policy:<br/>&nbsp; default-src 'self'; object-src 'none';<br/>
+      &nbsp; report-uri: 'http://example.com/report
+    </code>
+     <div role="note">
+       <ul>
+         <li>directives for: script, object, img, media, frame, font, connect (XHR), style</li>
+         <li>Also, report-uri</li>
+       </ul>
+       <b> DEMO</b>
+    </div>
+    </section>
+
+    <section>
+    <h3>CSP in action</h3>
+    <ul>
+      <li>Modern browsers applying CSP to browser UI</li>
+      <li>FirefoxOS - uses CSP for all privileged apps</li>
+    </ul>
+     <div role="note">
+       <ul>
+         <li>Chrome already, Fx working on it</li>
+         <li>FxOS apps - can do things normal webpages can't</li>
+       </ul>
+    </div>
+    </section>
+
+    <section>
+    <h3>Awesome!... but...</h3>
+    <ul>
+      <li>We have exiting content</li>
+      <li>Defaults are restrictive</li>
+      <li>Too relaxed -  pointless</li>
+      <li>CSP is awkward</li>
+      <li>What can we do?</li>
+    </ul>
+     <div role="note">
+       <ul>
+         <li>Existing content is a problem</li>
+         <li>Existing (or new) frameworks may not support CSP</li>
+         <li>'unsafe-inline' for scripts basically kills off the benefit</li>
+       </ul>
+    </div>
+    </section>
+
+    <section>
+    <h3>Fixing things (a bit)</h3>
+    <ul>
+      <li>Newer library versions (e.g. jquery)</li>
+      <li>Frameworks gaining support (e.g. Django)</li>
+      <li>CSP has gained new features</li>
+      <li>Better tools</li>
+    </ul>
+     <div role="note">
+       <ul>
+         <li>Many js library authors have realised eval breaks.</li>
+         <li></li>
+       </ul>
+    </div>
+    </section>
+
+    <section>
+      <h3>CSP 1.1 features</h3>
+      <ul>
+        <li>nonce-source</li>
+        <li>hash-source</li>
+        <li>can be used in creative ways (demo)</li>
+        <li>There are still limitations</li>
+      </ul>
+      <div role="note">
+        <ul>
+         <li>example</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Better tools</h3>
+      <ul>
+        <li>UserCSP</li>
+        <li>Hash generation tools</li>
+        <li>... and many others</li>
+      </ul>
+      <div role="note">
+        <ul>
+          <li>UserCSP helps you build policies</li>
+          <li>can automate generation of hash values or insertion of nonce 
+          attributes</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>Policy too relaxed</li>
+        <li>Policy inconsistently applied</li>
+        <li>Info leakage via report-uri</li>
+      </ul>
+      <div role="note">
+        <ul>
+        </ul>
+      </div>
     </section>
 
     <section>
