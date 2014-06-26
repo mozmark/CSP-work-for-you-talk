@@ -24,11 +24,18 @@
     <h3>Me (and why I'm here)</h3>
     <ul>
       <li>I am Mark Goodwin</li>
+      <li>OWASP East Midlands</li>
       <li>I work for <a href="http://www.mozilla.org">Mozilla</a> on security (platform, Firefox & web)</li>
       <li>I want to improve web security</li>
       <li>CSP is underused :(</li>
     </ul>
     <div role="note">
+      Why am I doing this talk?<br/>
+      OWASP - we care about the securing the web - but also<br/>
+      Mozilla - It's not enough to build the platform (talk about PHP and how
+      long it took people to even start using PDO)<br/>
+      We have to champion the security features of our platform (I'm hoping you
+      will help me!).
     </div>
     </section>
 
@@ -51,15 +58,14 @@
     <section>
     <h3>Let's talk about XSS</h3>
     <ul>
-      <li>Reflected</li>
-      <li>Stored</li>
+      <li>Reflected / Stored</li>
       <li>DOM<br/><input id="in1"><button onclick="document.getElementById('demo').innerHTML = 'Hi '+document.getElementById('in1').value+'!'">Click!</button></li>
       <div id="demo"></div>
     </ul>
      <div role="note">
-      It doesn't really make sense to talk about CSP without looking at why we
-      need it in the first place.<br/>
-      CSP - what it is and why it's great!
+       sometimes we categorise by reflected and stored.<br/>
+       Also we can categorize on served vs. DOM.<br/>
+       DOM is interesting because you ain't never gonna see it in your WAF.
     </div>
     </section>
 
@@ -71,6 +77,15 @@
       <li>... to secure content</li>
     </ul>
      <div role="note">
+       Let's think about a common theme in appsec.<br/>
+       Think about stack overflow, SQL Injection, heap overflow, XSS, command
+       injection, user after free - what do they all have in common?
+       <b>confusion of code and data</b><br/>
+       How do we fix this in other scenarios?<br/>(typesafe) Parameterized queries to stop SQLi,
+       Canaries on the stack to detect overflows. NX, DEP, etc.<br/>
+       These are all about prevention of (or detection of) mixing the two<br/>
+       CSP - what it is and why it's great!<br/>
+       Maybe think about what needs stopping to achieve the same for HTML / JS?
     </div>
     </section>
 
@@ -83,7 +98,8 @@
      <div role="note">
        <ul>
          <li>directives for: script, object, img, media, frame, font, connect (XHR), style</li>
-         <li>Also, report-uri</li>
+         <li>Also, report-uri (remember we mentioned some tech was about *detecting* bad stuff)</li>
+         <li>and unsafe-inline, unsafe-eval</li>
        </ul>
        <b> DEMO</b>
     </div>
@@ -92,11 +108,15 @@
     <section>
     <h3>CSP in action</h3>
     <ul>
+      <li>Some major sites already using it</li>
+      <li>More to follow</li>
       <li>Modern browsers applying CSP to browser UI</li>
       <li>FirefoxOS - uses CSP for all privileged apps</li>
     </ul>
      <div role="note">
        <ul>
+         <li>Twitter blogs, Twitter Mobile, Twitter Ads Center, Translation Center, Twitter for Business, Tweetdeck</li>
+         <li>Others to follow - talk more about this in a bit!</li>
          <li>Chrome already, Fx working on it</li>
          <li>FxOS apps - can do things normal webpages can't</li>
        </ul>
@@ -106,7 +126,7 @@
     <section>
     <h3>Awesome!... but...</h3>
     <ul>
-      <li>We have exiting content</li>
+      <li>We have existing content</li>
       <li>Defaults are restrictive</li>
       <li>Too relaxed -  pointless</li>
       <li>CSP is awkward</li>
@@ -114,9 +134,11 @@
     </ul>
      <div role="note">
        <ul>
-         <li>Existing content is a problem</li>
+         <li>Existing content is a problem (we have to secure the web we have, not just what we want to build).</li>
+         <li>The web we have has inline scripts. It has inline styles. It has script values attrs. It uses eval</li>
+         <li>(some laud the fact CSP forces some discipline - I'm more pragmatic)</li>
          <li>Existing (or new) frameworks may not support CSP</li>
-         <li>'unsafe-inline' for scripts basically kills off the benefit</li>
+         <li>'unsafe-inline' for scripts basically kills off the benefit. Unsafe eval is less bad but still problematic.</li>
        </ul>
     </div>
     </section>
@@ -125,7 +147,7 @@
     <h3>Fixing things (a bit)</h3>
     <ul>
       <li>Newer library versions (e.g. jquery)</li>
-      <li>Frameworks gaining support (e.g. Django)</li>
+      <li>Frameworks gaining support (e.g. <a href="http://django-csp.readthedocs.org">Django</a>)</li>
       <li>CSP has gained new features</li>
       <li>Better tools</li>
     </ul>
@@ -138,7 +160,7 @@
     </section>
 
     <section>
-      <h3>CSP 1.1 features</h3>
+      <h3>CSP 1.1 (2.0!) features</h3>
       <ul>
         <li>nonce-source</li>
         <li>hash-source</li>
@@ -146,9 +168,9 @@
         <li>There are still limitations</li>
       </ul>
       <div role="note">
-        <ul>
-         <li>example</li>
-        </ul>
+        Why should you use each?<br/>
+        Don't go overboard with hash-source - the hashes ain't small.<br/>
+        Still limitations - no script valued attributes (maybe that will be included).
       </div>
     </section>
 
@@ -161,6 +183,7 @@
       </ul>
       <div role="note">
         <ul>
+          <li>Devtools suck less than they used to</li>
           <li>UserCSP helps you build policies</li>
           <li>can automate generation of hash values or insertion of nonce 
           attributes</li>
@@ -177,6 +200,9 @@
       </ul>
       <div role="note">
         <ul>
+          Policy too relaxed - show Kailas' paper.<br/>
+          Inconsistent - talk about brochureware, admin thingies (e.g. django defaults)<br/>
+          be careful about what you report and to whom... (reports)
         </ul>
       </div>
     </section>
