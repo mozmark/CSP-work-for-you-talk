@@ -16,7 +16,7 @@
 
     <section>
     <h3>Me (and why I'm here)</h3>
-    <ul>
+    <ul class="incremental">
       <li>I am Mark Goodwin</li>
       <li>I work for <a href="http://www.mozilla.org">Mozilla</a> on security (platform, Firefox & web)</li>
       <li>I want to improve web security</li>
@@ -34,7 +34,7 @@
 
     <section>
     <h3>A plan for the talk</h3>
-    <ul>
+    <ul class="incremental">
       <li>Talk about... XSS</li>
       <li>... CSP (what, why?)</li>
       <li>... why CSP is awkward</li>
@@ -50,9 +50,9 @@
 
     <section>
     <h3>Let's talk about XSS</h3>
-    <ul>
-      <li>Reflected / Stored</li>
-      <li>DOM</li>
+    <ul class="incremental">
+      <li><a href="../examples/bad.php?test=<script>alert(123)</script>">Reflected</a> / Stored</li>
+        <li><a href="../examples/domxss.html#%3Cimg%20src=%22nothere.jpg%22%20onerror=%22alert%28123%29%22%3E">DOM</a></li>
     </ul>
      <div role="note">
        sometimes we categorise by reflected and stored.<br/>
@@ -63,7 +63,7 @@
 
     <section>
     <h3>Let's talk about CSP</h3>
-    <ul>
+    <ul class="incremental">
       <li>Content Security Policy</li>
       <li>It's a policy...</li>
       <li>... to secure content</li>
@@ -85,10 +85,10 @@
     <h3>example</h3>
     <code>
       &nbsp; Content-Security-Policy:<br/>&nbsp; default-src 'self'; object-src 'none';<br/>
-      &nbsp; report-uri: 'http://example.com/report
+      &nbsp; report-uri: http://example.com/report
     </code>
      <div role="note">
-       <ul>
+       <ul class="incremental">
          <li>directives for: script, object, img, media, frame, font, connect (XHR), style</li>
          <li>Also, report-uri (remember we mentioned some tech was about *detecting* bad stuff)</li>
          <li>and unsafe-inline, unsafe-eval</li>
@@ -99,7 +99,7 @@
 
     <section>
     <h3>CSP in action</h3>
-    <ul>
+    <ul class="incremental">
       <li>Some major sites already using it</li>
       <li>More to follow</li>
       <li>Modern browsers applying CSP to browser UI</li>
@@ -118,7 +118,7 @@
 
     <section>
     <h3>Awesome!... but...</h3>
-    <ul>
+    <ul class="incremental">
       <li>We have existing content</li>
       <li>Defaults are restrictive</li>
       <li>Too relaxed -  pointless</li>
@@ -138,7 +138,7 @@
 
     <section>
     <h3>Fixing things (a bit)</h3>
-    <ul>
+    <ul class="incremental">
       <li>Newer library versions (e.g. jquery)</li>
       <li>Frameworks gaining support (e.g. <a href="http://django-csp.readthedocs.org">Django</a>)</li>
       <li>CSP has gained new features</li>
@@ -154,7 +154,7 @@
 
     <section>
       <h3>CSP 1.1 (2.0!) features</h3>
-      <ul>
+      <ul class="incremental">
         <li>nonce-source</li>
         <li>hash-source</li>
         <li>can be used in creative ways (demo)</li>
@@ -169,7 +169,7 @@
 
     <section>
       <h3>Better tools</h3>
-      <ul>
+      <ul class="incremental">
         <li>UserCSP</li>
         <li>Hash generation tools</li>
         <li>... and many others</li>
@@ -186,7 +186,7 @@
 
     <section>
       <h3>Common Mistakes</h3>
-      <ul>
+      <ul class="incremental">
         <li>Policy too relaxed</li>
         <li>Policy inconsistently applied</li>
         <li>Static content ignored</li>
