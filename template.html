@@ -55,8 +55,9 @@
       <li>DOM</li>
     </ul>
      <div role="note">
-       sometimes we categorise by reflected and stored.<br/>
-       Also we can categorize on served vs. DOM.<br/>
+       sometimes we categorise by <b>reflected</b> and <b>stored</b>.<br/>
+       Also we can categorize on <b>where it happens</b> - server (conventional) or
+       client (DOM)<br/>
        DOM is interesting because you ain't never gonna see it in your WAF.
     </div>
     </section>
@@ -88,10 +89,28 @@
       &nbsp; report-uri: 'http://example.com/report
     </code>
      <div role="note">
+       HOW does it prevent XSS.
+       </br>
+       By default (even with default-src: *) inline scripts and styles are not
+       allowed.
+    </div>
+    </section>
+
+    <section>
+    <h3>Directives:</h3>
+    <code>
+      &nbsp;default-src<br/>
+      &nbsp;script-src<br/>
+      &nbsp;style-src<br/>
+      &nbsp;object-src<br/>
+      &nbsp;connect-src<br/>
+      &nbsp;
+    </code>
+    <div role="note">
        <ul>
          <li>directives for: script, object, img, media, frame, font, connect (XHR), style</li>
          <li>Also, report-uri (remember we mentioned some tech was about *detecting* bad stuff)</li>
-         <li>and unsafe-inline, unsafe-eval</li>
+         <li>object - plugins, etc. connect - XHR, etc.</li>
        </ul>
        <b> DEMO</b>
     </div>
@@ -194,6 +213,7 @@
       <div role="note">
         <ul>
           Policy too relaxed - show Kailas' paper.<br/>
+          Same-origin-policy<br/>
           Inconsistent - talk about brochureware, admin thingies (e.g. django defaults)<br/>
           be careful about what you report and to whom... (reports)
         </ul>
