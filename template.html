@@ -9,18 +9,18 @@
     <!-- One section is one slide -->
     <section>
     <figure> <!-- Figures are used to display images and videos fullpage -->
-      <img src="OWASP-1.jpg">
+      <img src="splash.png">
     </figure>
     <div role="note">OWASP logo</div>
     </section>
 
     <section>
     <h3>Me (and why I'm here)</h3>
-    <ul>
+    <ul class="incremental">
       <li>I am Mark Goodwin</li>
       <li>I work for <a href="http://www.mozilla.org">Mozilla</a> on security (platform, Firefox & web)</li>
       <li>I want to improve web security</li>
-      <li>CSP is underused :(</li>
+      <li>CSP is <a href="http://blog.veracode.com/2014/03/security-headers-on-the-top-1000000-websites-march-2014-report/">underused</a> :(</li>
     </ul>
     <div role="note">
       Why am I doing this talk?<br/>
@@ -44,15 +44,14 @@
     <div role="note">
       It doesn't really make sense to talk about CSP without looking at why we
       need it in the first place.<br/>
-      CSP - what it is and why it's great!
     </div>
     </section>
 
     <section>
     <h3>Let's talk about XSS</h3>
-    <ul>
-      <li>Reflected / Stored</li>
-      <li>DOM</li>
+    <ul class="incremental">
+      <li><a href="../examples/bad.php?test=<script>alert(123)</script>">Reflected</a> / Stored</li>
+        <li><a href="../examples/domxss.html#%3Cimg%20src=%22nothere.jpg%22%20onerror=%22alert%28123%29%22%3E">DOM</a></li>
     </ul>
      <div role="note">
        sometimes we categorise by <b>reflected</b> and <b>stored</b>.<br/>
@@ -64,7 +63,7 @@
 
     <section>
     <h3>Let's talk about CSP</h3>
-    <ul>
+    <ul class="incremental">
       <li>Content Security Policy</li>
       <li>It's a policy...</li>
       <li>... to secure content</li>
@@ -77,8 +76,8 @@
        How do we fix this in other scenarios?<br/>(typesafe) Parameterized queries to stop SQLi,
        Canaries on the stack to detect overflows. NX, DEP, etc.<br/>
        These are all about prevention of (or detection of) mixing the two<br/>
-       CSP - what it is and why it's great!<br/>
-       Maybe think about what needs stopping to achieve the same for HTML / JS?
+       Hard in HTML: contexts (entity, attr, css, etc). Parser weirdness. etc.
+       What needs stopping to achieve the same for HTML / JS?
     </div>
     </section>
 
@@ -86,7 +85,7 @@
     <h3>example</h3>
     <code>
       &nbsp; Content-Security-Policy:<br/>&nbsp; default-src 'self'; object-src 'none';<br/>
-      &nbsp; report-uri: 'http://example.com/report
+      &nbsp; report-uri: http://example.com/report
     </code>
      <div role="note">
        HOW does it prevent XSS.
@@ -104,7 +103,7 @@
       &nbsp;style-src<br/>
       &nbsp;object-src<br/>
       &nbsp;connect-src<br/>
-      &nbsp;
+      &nbsp;<a href="http://www.w3.org/TR/CSP2/#sec-directives">etc...</a>
     </code>
     <div role="note">
        <ul>
@@ -118,7 +117,7 @@
 
     <section>
     <h3>CSP in action</h3>
-    <ul>
+    <ul class="incremental">
       <li>Some major sites already using it</li>
       <li>More to follow</li>
       <li>Modern browsers applying CSP to browser UI</li>
@@ -137,7 +136,7 @@
 
     <section>
     <h3>Awesome!... but...</h3>
-    <ul>
+    <ul class="incremental">
       <li>We have existing content</li>
       <li>Defaults are restrictive</li>
       <li>Too relaxed -  pointless</li>
@@ -157,7 +156,7 @@
 
     <section>
     <h3>Fixing things (a bit)</h3>
-    <ul>
+    <ul class="incremental">
       <li>Newer library versions (e.g. jquery)</li>
       <li>Frameworks gaining support (e.g. <a href="http://django-csp.readthedocs.org">Django</a>)</li>
       <li>CSP has gained new features</li>
@@ -172,10 +171,10 @@
     </section>
 
     <section>
-      <h3>CSP 1.1 (2.0!) features</h3>
-      <ul>
-        <li>nonce-source</li>
-        <li>hash-source</li>
+      <h3>CSP 2 features</h3>
+      <ul class="incremental">
+        <li>nonce-source (<a href="../examples/nonce_badder.php?test=<script>alert(123)</script>">example</a>)</li>
+        <li>hash-source (<a href="../sourcery/domxss.html#%3Cimg%20src=%22nothere.png%22%20onerror=%22alert%28123%29%22%3E">example</a>)</li>
         <li>can be used in creative ways (demo)</li>
         <li>There are still limitations</li>
       </ul>
@@ -188,7 +187,7 @@
 
     <section>
       <h3>Better tools</h3>
-      <ul>
+      <ul class="incremental">
         <li>UserCSP</li>
         <li>Hash generation tools</li>
         <li>... and many others</li>
@@ -205,17 +204,16 @@
 
     <section>
       <h3>Common Mistakes</h3>
-      <ul>
-        <li>Policy too relaxed</li>
-        <li>Policy inconsistently applied</li>
+      <ul class="incremental">
+        <li>Policy <a href="../paper.pdf">too relaxed</a></li>
+        <li>Policy <a href="http://django-csp.readthedocs.org/en/latest/configuration.html#other-settings">inconsistently applied</a></li>
         <li>Static content ignored</li>
       </ul>
       <div role="note">
         <ul>
           Policy too relaxed - show Kailas' paper.<br/>
-          Same-origin-policy<br/>
+          <b>Same-origin-policy</b><br/>
           Inconsistent - talk about brochureware, admin thingies (e.g. django defaults)<br/>
-          be careful about what you report and to whom... (reports)
         </ul>
       </div>
     </section>
