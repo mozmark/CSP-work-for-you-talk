@@ -87,6 +87,7 @@
       &nbsp; Content-Security-Policy:<br/>&nbsp; default-src 'self'; object-src 'none';<br/>
       &nbsp; report-uri: http://example.com/report
     </code>
+    <p><a href="http://localhost/mgoodwin/demos/default/bad.php?test=<script>alert(123)</script>">demo</a></p>
      <div role="note">
        HOW does it prevent XSS.
        </br>
@@ -175,13 +176,13 @@
       <ul class="incremental">
         <li>nonce-source (<a href="../examples/nonce_badder.php?test=<script>alert(123)</script>">example</a>)</li>
         <li>hash-source (<a href="../sourcery/domxss.html#%3Cimg%20src=%22nothere.png%22%20onerror=%22alert%28123%29%22%3E">example</a>)</li>
-        <li>can be used in creative ways (demo)</li>
+        <li>can be used in <a href="https://github.com/mozmark/django-csp-example/blob/master/csptest/templates/django_tag.html#L6">creative ways</a></li>
         <li>There are still limitations</li>
       </ul>
       <div role="note">
         Why should you use each?<br/>
         Don't go overboard with hash-source - the hashes ain't small.<br/>
-        Still limitations - no script valued attributes (maybe that will be included).
+        Still limitations - no script valued attributes (maybe that will be included).<br/> (l0 extract)
       </div>
     </section>
 
@@ -189,7 +190,8 @@
       <h3>Better tools</h3>
       <ul class="incremental">
         <li>UserCSP</li>
-        <li>Hash generation tools</li>
+        <li>Hash generation tools (demo)</li>
+        <li><a href="https://github.com/st3fan/moz-csp-dashboard">Report dashboards</a></li>
         <li>... and many others</li>
       </ul>
       <div role="note">
@@ -223,8 +225,9 @@
     <ul>
       <li> Questions? </li>
       <li> Contact: </li>
-      Twitter: @mr_goodwin<br/>
-      irc: mgoodwin on irc.mozilla.org<br/>
+      @mr_goodwin<br/>
+      @mozsec<br/>
+      mgoodwin on irc.mozilla.org<br/>
     </ul>
     <div role="note">
       <p>
